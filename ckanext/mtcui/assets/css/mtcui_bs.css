@@ -1,0 +1,149 @@
+/* 1) Top header bar (dark blue) */
+.header-navbar {
+    background-color: #1c237e;
+    padding: 0.5rem 0;
+  }
+  .header-navbar .navbar-brand,
+  .header-navbar .btn {
+    color: #fff;
+  }
+  .header-navbar .btn:hover,
+  .header-navbar .btn:focus {
+    color: #e0e0e0;
+  }
+  .bg-darkblue {
+    background-color: #1C237E !important;
+  }
+  
+  /* 2) Main navigation bar (white) */
+  .navbar-light.bg-white {
+    background-color: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0.5rem 0;
+  }
+  .navbar-light.bg-white .nav-link {
+    color: #333;
+  }
+  .navbar-light.bg-white .nav-link:hover,
+  .navbar-light.bg-white .nav-link:focus {
+    color: #007bff;
+  }
+  .navbar-light.bg-white .nav-link.active {
+    color: #d00;
+  }
+  
+  /* 3) Common focus style */
+  .navbar .btn:focus-visible,
+  .navbar .nav-link:focus-visible,
+  .navbar-toggler:focus-visible {
+    outline: 2px solid #4a90e2;
+    outline-offset: 2px;
+  }
+
+/* -----------------------------------------------------------*/
+/* --히어로 전체 -----------------------------------------------*/
+/* -----------------------------------------------------------*/
+
+.hero-section {
+  display: flex;
+  background: url('/images/hero_img.png') repeat left center;
+  max-width: 1280px;
+  aspect-ratio: 1282 / 464;
+  /* margin: 2rem auto; */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  /* background: #1c237e; */
+}
+
+.hero-image {
+  flex: 0 0 30%;
+  background-size: cover;
+/*   min-width: 350px; */
+}
+
+.hero-content {
+  flex: 1;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #1c237e 100%);
+  /* background: transparent; */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.hero-search {
+  margin-bottom: 2rem;
+}
+
+
+/* 통계 카드 전체 컨테이너 */
+.stats-cards {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-start;
+}
+
+/* 각 카드 아이템 */
+.stats-cards > div {
+  background: transparent;
+  border: 1.5px solid #fff;
+  border-radius: 1rem;
+  padding: 1.2rem 0rem;
+  min-width: 140px;
+  flex: 1;
+  text-align: center;
+}
+
+/* 아이콘 */
+.stats-cards i {
+  color: #1c237e;
+  margin-bottom: 0.5rem;
+}
+
+/* 숫자 */
+.stats-cards p.h4 {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* 항목명 */
+.stats-cards small {
+  color: #adb1b4;
+}
+
+.stats-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.5rem;
+  object-fit: contain;
+}
+
+/* -----------------------------------------------------------*/
+/* --footer --------------------------------------------------*/
+/* -----------------------------------------------------------*/
+
+.site-footer {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.site-footer a {
+  color: #333;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer i {
+  color: #555;
+}

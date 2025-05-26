@@ -1,0 +1,34 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('About') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('About'), named_route='home.about' %}</li>
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  {% asset 'mtcui/mtcui-css' %}
+{% endblock %}
+
+<!-- {% asset 'ckanext-mtcui/mtcui-css' %} -->
+{% block primary %}
+  <article class="module" role="main">
+    <div class="module-content">
+      {% block about %}
+        {% if g.site_about %}
+          {{ h.render_markdown(g.site_about) }}
+        {% else %}
+          <h1 class="page2-heading">{{ _('About') }}5134</h1>
+          {% snippet 'home/snippets/about_text.html' %}
+        {% endif %}
+      {% endblock %}
+    </div>
+
+    <div class="mtcui-highlight">
+      CKAN 확장 모듈 <strong>mtcui</strong>가 성공적으로 적용되었습니다!
+    </div>
+  </article>
+{% endblock %}
+
+{% block secondary %}{% endblock %}

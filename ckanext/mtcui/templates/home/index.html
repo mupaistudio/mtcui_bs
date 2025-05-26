@@ -1,0 +1,49 @@
+{% extends "page.html" %}
+{% block content %}
+<div class="container site-wrapper">
+    {{ self.flash() }}
+    {% block primary_content %}
+    <!-- Hero Section 시작 -->
+
+    <div class="container site-wrapper">
+      <!-- Hero Section 시작 -->
+      <section class="hero-section mb-5">
+        <div class="hero-image"></div>
+        <div class="hero-content">
+          <h1 class="mb-4">Welcome to <b>Lao PDR Open Data</b></h1>
+          <form class="d-flex hero-search mb-5" action="#" method="get">
+            <input class="form-control me-2" type="search" placeholder="Search datasets" aria-label="검색" />
+            <button class="btn btn-light" type="submit">
+              🔍
+            </button>
+          </form>
+          <div class="d-flex stats-cards text-center">
+            <div>
+              <img src="/images/hero_dataset.svg" alt="Datasets" class="stats-icon" />
+              <p class="h4 mb-0">17,949</p>
+              <small>Datasets</small>
+            </div>
+            <div>
+              <img src="/images/hero_org.svg" alt="Bureau" class="stats-icon" />
+              <p class="h4 mb-0">89</p>
+              <small>Bureau</small>
+            </div>
+            <div>
+              <img src="/images/hero_grp.svg" alt="Group" class="stats-icon" />
+              <p class="h4 mb-0">78</p>
+              <small>Group</small>
+            </div>
+            <div>
+              <img src="/images/hero_resource.svg" alt="Resource" class="stats-icon" />
+              <p class="h4 mb-0">43,589</p>
+              <small>Resource</small>
+            </div>
+          </div>
+        </div>
+      </section>
+  </div>
+  
+    <!-- Hero Section 끝 -->
+    {% endblock primary_content %}
+</div>
+{% endblock content %}

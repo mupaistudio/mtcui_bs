@@ -1,0 +1,18 @@
+# mtcui-js:
+#   filter: rjsmin
+#   output: ckanext-mtcui/%(version)s-mtcui.js
+#   contents:
+#     - js/mtcui.js
+#   extra:
+#     preload:
+#       - base/main
+
+mtcui-css:
+  filter: cssrewrite
+  output: ckanext-mtcui/mtcui.css
+  contents:
+#    - css/styleguide.css
+#    - css/globals.css
+#    - css/style.css
+    - css/mtcui_bs.css
+    - css/responsive.css  

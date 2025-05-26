@@ -1,0 +1,68 @@
+/* 1) Default: center .site-wrapper, max width 1200px */
+.site-wrapper {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 2) At 1200px and below: apply 1rem horizontal padding to all .container (site-wrapper ⏤ px-0) */
+@media (max-width: 1280px) {
+  .container.site-wrapper,
+  .container.px-0 {
+    max-width: 100% !important;
+    margin: 0 !important;
+/*       padding-left: 1rem !important;
+    padding-right: 1rem !important; */
+  }
+  .navbar-toggler {
+    margin-left: 1rem !important;
+  }
+
+  /* 카드 스타일 */
+  .stats-cards {
+    gap: 1rem;
+  }
+  
+  .stats-cards > div {
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .stats-cards > div {
+    padding: 0.8rem;
+/*       min-width: 120px; */
+  }
+  
+  .stats-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section { 
+    display: flex;
+  }
+  .hero-image { 
+    display: none; 
+  }
+  .stats-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 100%;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .stats-cards > div {
+    flex: 0 0 calc(50% - 0.5rem);
+    min-width: 120px;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+  .site-footer .text-md-end {
+    text-align: left !important;
+  }
+}
+

@@ -1,0 +1,75 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _("Welcome") }}{% endblock %}
+{#
+  {% block subtitle %}{{ _("Welcome to Lao PDR Open Data") }}{% endblock %}
+#}
+{% block maintag %}{% endblock %}
+{% block toolbar %}{% endblock %}
+
+{# 
+page.html (기본 템플릿)
+│
+└── home/index.html (현재 파일)
+     ├── block subtitle : 페이지의 서브 타이틀
+     ├── block maintag : 메인 태그
+     ├── block toolbar : 도구 모음
+     └── block content : 메인 콘텐츠
+          └── block primary_content : 주요 콘텐츠
+               ├── block promoted : 추천 데이터셋
+               ├── block search : 검색 기능
+               ├── block featured_group : 추천 그룹
+               └── block featured_organization : 추천 조직
+#}
+
+{% block content %}
+<div class="homepage">
+  <div id="content" class="container">
+    {{ self.flash() }}
+  </div>
+  {% block primary_content %}
+  <div role="main">
+    <div class="main hero">
+      <div class="container">
+        <div class="row">
+
+
+          <div class="col-md-4">
+            {% block promoted %}
+            {% snippet 'home/snippets/promoted.html' %}
+            {% endblock promoted %}
+          </div>
+          <div class="col-md-8">
+            {% block search %}
+            {% snippet 'home/snippets/search.html', search_facets=search_facets %}
+            {% endblock search %}
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="main module-feeds">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            {# 참고: 이 featured_group 블록은 문서의 테마 튜토리얼에서 예제로 사용됩니다! 이 코드를 변경할 경우, 문서도 업데이트해야 하는지 확인하세요. #}
+            {# 템플릿 블록 예제 시작 #}
+            {% block featured_group %}
+            {% snippet 'home/snippets/featured_group.html' %}
+            {% endblock %}
+            {# 템플릿 블록 예제 끝 #}
+          </div>
+          <div class="col-md-2">
+            {% block featured_organization %}
+            {% snippet 'home/snippets/featured_organization.html' %}
+            {% endblock featured_organization %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock primary_content %}
+</div>
+{% endblock content %}

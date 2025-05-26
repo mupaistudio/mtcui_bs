@@ -1,0 +1,143 @@
+{% set dataset_type = h.default_package_type() %}
+
+{# === Top Header Bar: Dark Blue === #}
+<div class="w-100 bg-dareblue border-bottom">
+  <nav class="navbar header-navbar navbar-expand-lg navbar-dark">
+    <div class="container site-wrapper px-4">
+
+      {# Logo Block from header_copy.html #}
+      {% block header_logo %}
+      <!-- 브랜드 -->
+      <a class="navbar-brand text-light" href="#">Data.gov.la</a>
+      {% endblock %}
+
+      {# Debug Indicator #}
+      {% block header_debug %}
+        {% if g.debug and not g.debug_supress_header %}
+          <div class="header-debug text-warning ms-auto">Debug: {{ g.blueprint }} / {{ g.view }}</div>
+        {% endif %}
+      {% endblock %}
+
+      {# Collapse Toggle for Account Section #}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#account-menu" aria-controls="account-menu" aria-expanded="false" aria-label="{{ _('Toggle account menu') }}">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      {# Account Area #}
+      <div class="collapse navbar-collapse" id="account-menu">
+        {% block header_account %}
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            {% if c.userobj %}
+
+              {# Logged-in: Admin Link #}
+              {% if c.userobj.sysadmin %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ h.url_for('admin.index') }}" title="{{ _('Sysadmin settings') }}">
+                    <i class="fa fa-gavel"></i> <span>{{ _('Admin') }}</span>
+                  </a>
+                </li>
+              {% endif %}
+
+              {# Profile Link #}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ h.url_for('user.read', id=c.userobj.name) }}" title="{{ _('View profile') }}">
+                  {{ h.user_image(c.userobj, size=22) }} <span>{{ c.userobj.display_name }}</span>
+                </a>
+              </li>
+
+              {# Dashboard Link #}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ h.url_for('dashboard.datasets') }}" title="{{ _('Dashboard') }}">
+                  <i class="fa fa-tachometer"></i> <span>{{ _('Dashboard') }}</span>
+                </a>
+              </li>
+
+              {# Settings Link #}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ h.url_for('user.edit', id=c.userobj.name) }}" title="{{ _('Profile settings') }}">
+                  <i class="fa fa-cog"></i> <span>{{ _('Settings') }}</span>
+                </a>
+              </li>
+
+              {# Logout Form #}
+              <li class="nav-item">
+                <form action="{{ h.url_for('user.logout') }}" method="post" class="d-inline">
+                  {{ h.csrf_input() }}
+                  <button class="btn btn-link nav-link" type="submit" title="{{ _('Log out') }}">
+                    <i class="fa fa-sign-out"></i>
+                  </button>
+                </form>
+              </li>
+
+            {% else %}
+
+              {# Not Authenticated: Login/Register #}
+              <li class="nav-item">
+                <a class="btn btn-outline-light me-2" href="{{ h.url_for('user.login') }}">{{ _('Log in') }}</a>
+              </li>
+              {% if h.check_access('user_create') %}
+              <li class="nav-item">
+                <a class="btn btn-light text-primary" href="{{ h.url_for('user.register') }}">{{ _('Register') }}</a>
+              </li>
+              {% endif %}
+
+            {% endif %}
+          </ul>
+        {% endblock %}
+      </div>
+
+    </div>
+  </nav>
+</div>
+
+{# === Main Navigation Bar: White === #}
+<div class="w-100 bg-white border-bottom">
+  <div class="container site-wrapper px-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+
+      {# Toggle for Main Menu #}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu" aria-controls="mainMenu" aria-expanded="false" aria-label="{{ _('Toggle navigation') }}">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainMenu">
+
+        {# Navigation Tabs #}
+        <ul class="navbar-nav me-3 mb-2 mb-lg-0 fs-5">
+          {% block header_site_navigation_tabs %}
+            {% set org_type   = h.default_group_type('organization') %}
+            {% set group_type = h.default_group_type('group') %}
+            {{ h.build_nav_main(
+                ('home.index', _('Home')),
+                (dataset_type ~ '.search', h.humanize_entity_type('package', dataset_type,'main nav') or _('Datasets'), ['dataset','resource']),
+                (org_type ~ '.index', h.humanize_entity_type('organization', org_type,'main nav') or _('Organizations'), ['organization']),
+                (group_type ~ '.index', h.humanize_entity_type('group', group_type,'main nav') or _('Groups'), ['group']),
+                ('home.about', _('About'))
+            ) }}
+          {% endblock %}
+        </ul>
+
+        {# Site Search Form #}
+        {% block header_site_search %}
+          <form class="d-flex site-search me-3" action="{{ url_for(dataset_type ~ '.search') }}" method="get">
+            <label for="field-sitewide-search" class="visually-hidden">{% block header_site_search_label %}{{ h.humanize_entity_type('package', dataset_type,'search_placeholder') or _('Search Datasets...') }}{% endblock %}</label>
+            <input id="field-sitewide-search" class="form-control me-2" type="search" name="q" placeholder="{{ _('Search...') }}" aria-label="{{ _('Search datasets') }}" />
+            <button class="btn btn-outline-secondary" type="submit" aria-label="{{ _('Submit') }}"><i class="fa fa-search"></i></button>
+          </form>
+        {% endblock %}
+
+        {# Language Selector #}
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex align-items-center gap-1">
+            <img class="ellipse" src="{{ h.url_for_static_or_external('/images/flg_lao_off.svg') }}" alt="Lao" width="20" height="20" />
+            <span class="text-dark">Lao</span>
+          </div>
+          <div class="d-flex align-items-center gap-1">
+            <img class="ellipse" src="{{ h.url_for_static_or_external('/images/flg_eng_on.svg') }}" alt="English" width="20" height="20" />
+            <span class="text-dark">EN</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
